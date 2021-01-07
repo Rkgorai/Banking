@@ -1,3 +1,3 @@
  <?php
-$pdo = new PDO('mysql:host=localhost;port=3306;dbname=banking', 'rahul', 'pass');
+$pdo = new PDO('mysql:host=localhost;port=3306;dbname=banking', 'rowdy', 'king');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

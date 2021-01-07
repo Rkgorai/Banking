@@ -6,6 +6,19 @@ if ( isset($_POST['cancel']) ) {
     header('Location: search_cust.php');
     return;
 }
+$sender = $_GET['account_no'];
+if(isset($_POST['reciever'])) {
+    $msg = validatereciever($pdo);
+    if (is_string($msg)){
+        $_SESSION['error'] = $msg;
+        header("Location: view_profile.php?account_no=".$sender);
+        return;
+    }
+
+    $reciever = $_POST['reciever'];
+    header('Location: confirmation.php?sender='.$sender.'&reciever='.$reciever);
+    return;
+}
  ?>
 
 
@@ -19,9 +32,10 @@ if ( isset($_POST['cancel']) ) {
  <body>
  <div class="container">
  <h1>Profile Information</h1>
+ <?php flashMessages(); ?>
  <div id="profile" class="jumbotron">
 <?php 
-$arr = array();
+
 $stmt = $pdo->prepare("SELECT * FROM members  where account_no = :xyz");
 $stmt->execute(array(":xyz" => $_GET['account_no']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -72,7 +86,7 @@ echo "</h3></p><p></center>";
                 '<div class="form-group row">\
                     <label for="acc_no" class="col-md-2 col-form-label">Account no</label>\
                     <div class="col-md-10">\
-							<input type="text" name="email" id="email" class="form-control">\
+						<input type="text" name="reciever" id="reciever" class="form-control">\
 					</div>\
 				</div>\
                 <div class="form-group row">\

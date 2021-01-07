@@ -7,18 +7,7 @@ if ( isset($_POST['cancel']) ) {
     return;
 }
 $sender = $_GET['account_no'];
-if(isset($_POST['reciever'])) {
-    $msg = validatereciever($pdo);
-    if (is_string($msg)){
-        $_SESSION['error'] = $msg;
-        header("Location: view_profile.php?account_no=".$sender);
-        return;
-    }
 
-    $reciever = $_POST['reciever'];
-    header('Location: confirmation.php?sender='.$sender.'&reciever='.$reciever);
-    return;
-}
  ?>
 
 
@@ -84,19 +73,65 @@ echo "</h3></p><p></center>";
 
             $('#transact_fields').append(
                 '<div class="form-group row">\
-                    <label for="acc_no" class="col-md-2 col-form-label">Account no</label>\
+                    <label for="acc_no" class="col-md-2 col-form-label">Search for Customers</label>\
                     <div class="col-md-10">\
-						<input type="text" name="reciever" id="reciever" class="form-control">\
+                    <input type="text" name="search" placeholder="Search for Customers" class="form-control" >\
+                    <select  id = "se" name="se" value = "se" class="form-control">\
+                    <option value="FirstName"> First Name</option>\
+                    <option value="Mobile"> Mobile</option>\
+                    <option value="Email">Email </option>\
+                    <option value="account_no" >Account No</option>\
+                  </select>\
 					</div>\
 				</div>\
                 <div class="form-group row">\
                     <div class="col-md-8">\
-                        <input type="submit" class="btn btn-primary btn-lg" value="Transfer" name="transfer">\
+                        <input type="submit" class="btn btn-primary btn-lg" value="Search" name="transfer">\
                         <input type="submit" class="btn btn-secondary btn-lg" name="cancel" value="Cancel">\
                 </div>'
             );
         });
      });
+    
  </script>
+ <?php
+ if(isset($_POST['transfer'])){
+    $val = $_POST['se'];
+    $searchq = $_POST['search'];
+    $qu = "SELECT * FROM members WHERE  $val LIKE '%$searchq%'";
+    $stmt = $pdo->query($qu);
+    echo ("<h4>Search result for : '".$searchq."' in '".$val."' </h4>");
+      echo('<table class="table table-striped">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">Account No</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Mobile</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead><tbody>');
+     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo('<tr>
+              <th scope="row">');
+      echo(htmlentities($row['account_no']));
+      $reciever = $row['account_no'];
+      echo('</th><td>');
+      echo($row['FirstName']." ".$row['LastName']);
+      echo('</td><td>');
+      echo(htmlentities($row['Gender']));
+      echo('</td><td>');
+      echo(htmlentities($row['Mobile']));
+      echo('</td><td>');
+      echo(htmlentities($row['Email']));
+      echo('</td><td>');
+      echo('<a class="btn btn-primary" href="confirmation.php?sender='.$sender.'&reciever='.$reciever.'"role="button">Send</a>');
+      echo('</td></tr>');
+  }
+  echo('</tbody></table>'); 
+
+  }
+  ?>
  </body>
  </html>

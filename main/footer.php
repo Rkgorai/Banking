@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" id="footer">
         <div class="container">
             <div class="row">             
                 <div class="col-4 offset-1 col-sm-2">
@@ -17,7 +17,7 @@
                         Kolkata, West Bengal, India<br><br>
                   <i class="fa fa-phone fa-lg"></i>: +91 887 744 5566<br>
                   <i class="fa fa-fax fa-lg"></i>: +91 887 744 5566<br>
-                  <i class="fa fa-envelope fa-lg"></i>: <a href="mailto:olms@library.com">olms@library.com</a>
+                  <i class="fa fa-envelope fa-lg"></i>: <a href="mailto:olms@bank.com">olms@bank.com</a>
                </address>
                 </div>
                 <div class="col-12 col-sm-4 align-self-center">

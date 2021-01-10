@@ -180,6 +180,9 @@ echo '</h3></p><br><br><p><h5>
                   </tr>
               </thead><tbody>');
      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+         if($row['account_no'] == $sender){
+             continue;
+         }
       echo('<tr>
               <th scope="row">');
       echo(htmlentities($row['account_no']));

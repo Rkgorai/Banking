@@ -8,7 +8,7 @@
         return;
     }
 
-    $sender = $_GET['sender'];
+    $sender = $_GET['sender']; 
     $reciever = $_GET['reciever'];
 
     if(isset($_POST['amount']) && isset($_POST['check'])){
@@ -31,7 +31,9 @@
 
         if (is_string($msg)){
             $_SESSION['error'] = $msg;
-            header("Location: confirmation.php?sender=".$sender."&reciever=".$reciever);
+            echo '<script>alert("'.$msg.'");
+              window.location.replace(confirmation.php?sender="'.$sender.'"&reciever="'.$reciever.'");
+            </script>';
             return;
         }
 
@@ -39,7 +41,9 @@
 
         if (is_string($msg)){
             $_SESSION['error'] = $msg;
-            header("Location: confirmation.php?sender=".$sender."&reciever=".$reciever);
+            echo '<script>alert("'.$msg.'");
+              window.location.replace("confirmation.php?sender="'.$sender.'"&reciever="'.$reciever.'");
+            </script>';
             return;
         }
         echo '<script>alert("Money Successfully Transferred");
@@ -60,6 +64,7 @@
     <div class="container" id="confirmation">
         <div class="row row-content">
             <div class="col-12">
+            <?php flashMessages(); ?>
                 <h1>Transfer Money</h1>
             </div>
             <div class="col-12 col-md-6">

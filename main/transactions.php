@@ -28,7 +28,7 @@
     if(isset($_POST['submit'])){
       $val = $_POST['se'];
       $searchq = $_POST['search'];
-      $qu = "SELECT * FROM transations WHERE  $val LIKE '%$searchq%'";
+      $qu = "SELECT * FROM transactions WHERE  $val LIKE '%$searchq%'";
       $stmt = $pdo->query($qu);
       echo ("<h4>Search result for : '".$searchq."' in '".$val."' </h4>");
         echo('<table class="table table-striped">

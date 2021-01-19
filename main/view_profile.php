@@ -40,7 +40,7 @@ $sender = $_GET['account_no'];
                     </tr>
                 </thead><tbody>
             <?php
-                $stmt = $pdo->prepare("SELECT * FROM transactions  where sender = :xyz OR reciever = :xyz");
+                $stmt = $pdo->prepare("SELECT * FROM transactions where sender = :xyz OR reciever = :xyz ORDER BY transaction_id DESC");
                 $stmt->execute(array(":xyz" => $_GET['account_no']));
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     if($row['sender'] == $_GET['account_no']){

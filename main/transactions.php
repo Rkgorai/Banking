@@ -58,7 +58,7 @@
     echo('</tbody></table>'); 
 
     }
-    $sql = "SELECT * FROM transactions";
+    $sql = "SELECT * FROM transactions ORDER BY transaction_id DESC";
     $stmt = $pdo->query($sql);
         echo('<table class="table table-striped">
                 <thead class="thead-dark">

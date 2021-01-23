@@ -13,27 +13,6 @@
 		unset($_SESSION['error']);
 		}
     }
-    
-    function validatereciever($pdo) {
-        if(strlen($_POST['reciever'])<1){
-            return "All fields are required";
-        }
-
-        $flag=0;
-        $sql = "SELECT account_no FROM members";
-        $stmt = $pdo->query($sql);
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if($row['account_no']==$_POST['reciever']) {
-                $flag = 1;
-            }
-        }
-
-        if($flag!=1){
-            return "Enter Valid Account no";
-        }
-
-        return true;
-    }
 
     function validateamount() {
         if(strlen($_POST['amount'])<1){
